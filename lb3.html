@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="app">
+    <h1>Customizable image gallery</h1>
+
+    <div
+        class="image-block"
+        v-for="(img, index) in images"
+        :key="index"
+        @click="selected = index"
+        :class="{ 'selected-item': selected === index }"
+    >
+        <strong>Image {{ index + 1 }}</strong>
+        <br><br>
+        
+        <img
+            :src="img.src"
+            :alt="img.alt"
+            :style="{ 
+                width: img.width + 'px', 
+                height: img.height + 'px', 
+                borderWidth: img.border + 'px' 
+            }"
+        >
+    </div>
+
+    <div id="buttonfield">
+        <button id="arrup" @click="moveUp" :disabled="selected === null || selected === 0"></button>
+        <button id="arrdown" @click="moveDown" :disabled="selected === null || selected === images.length - 1"></button>
+    </div>
+
+    <div id="controls" v-if="selected !== null">
+        <h3>Settings for Image {{ selected + 1 }}</h3>
+
+        <div class="input-group">
+            <label>
+                Width (px):
+                <input type="number" v-model.number="images[selected].width">
+            </label>
+
+            <label>
+                Height (px):
+                <input type="number" v-model.number="images[selected].height">
+            </label>
+
+            <label>
+                Border (px):
+                <input type="number" v-model.number="images[selected].border" min="0">
+            </label>
+
+            <label>
+                Alt text:
+                <input type="text" v-model="images[selected].alt">
+            </label>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+const { createApp } = Vue
+
+createApp({
+    data() {
+        return {
+            selected: null,
+            images: [
+                { src: 'https://preview.redd.it/heolstor-the-nightlord-art-by-me-v0-gfapipftvtwf1.jpeg?auto=webp&s=481681cc5e0a191a32eebdc4aed4081090f585a9', alt: 'Silver Knight', border: 2, width: 300, height: 200 },
+                { src: 'https://www.mapsland.com/maps/games/large-detailed-road-map-of-gta-5.jpg', alt: 'Los Santos Map', border: 2, width: 300, height: 200 },
+                { src: 'https://www.tuneandfairweather.com/cdn/shop/files/mappreview.png?v=1683299889', alt: 'Lordran Map', border: 2, width: 300, height: 200 },
+                { src: 'https://i.redd.it/1ejksldj5h981.png', alt:'Ds 2 map', border: 2, width: 300, height: 200 },
+                { src: 'https://preview.redd.it/is-this-elden-john-v0-xf2kfls2bdpd1.png?width=640&crop=smart&auto=webp&s=86a30d5dd0ff0f784414e05960c7ac61d36a64db', alt: 'statue', border: 2, width: 300, height: 200 },
+                { src: 'https://eldenring.wiki.fextralife.com/file/Elden-Ring/mending-rune-of-the-death-prince-key-item-elden-ring-wiki-guide.png', alt: 'Grey rune', border: 2, width: 300, height: 200 },
+                { src: 'https://tse2.mm.bing.net/th/id/OIP.HDCF4ijqz9X4vdmX7KXSewHaFj', alt: 'Samsung phone', border: 2, width: 300, height: 200 },
+                { src: 'https://th.bing.com/th/id/R.646e495e5d429955d36216d5f48b21a1?rik=mIyeYJUpDSPUAg&pid=ImgRaw&r=0', alt: 'Mcquinn shoe', border: 2, width: 300, height: 200 },
+                { src: 'https://cdna.artstation.com/p/assets/images/images/044/988/522/large/nika-gecaj-moonlightgreatsword.jpg', alt: 'Blue sword', border: 2, width: 300, height: 200 }
+            ]
+        }
+    },
+    methods: {
+        moveUp() {
+            if (this.selected > 0) {
+                const i = this.selected;
+                [this.images[i - 1], this.images[i]] = [this.images[i], this.images[i - 1]];
+                this.selected--; 
+            }
+        },
+        moveDown() {
+            if (this.selected < this.images.length - 1) {
+                const i = this.selected;
+                [this.images[i + 1], this.images[i]] = [this.images[i], this.images[i + 1]];
+                this.selected++;
+            }
+        }
+    }
+}).mount('#app')
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+body {
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+.image-block {
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.image-block.selected-item {
+    background-color: #f0f8ff;
+    border-color: #007bff;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    border-style: solid;
+    border-color: black;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-color: #f9f9f9;
+    background-size: 60%; 
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover:not(:disabled) {
+    background-color: #e2e6ea;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#arrup {
+    background-image: url('https://openclipart.org/image/2400px/svg_to_png/154969/1313159942.png');
+}
+
+#arrdown {
+    background-image: url('https://www.clipartbest.com/cliparts/9ip/6eR/9ip6eRg4T.png');
+}
+
+#controls {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    position: sticky;
+    bottom: 20px;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
